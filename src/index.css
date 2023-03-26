@@ -7,3 +7,9 @@ body {
     height: 100vh;
 }
 
+
+
+.clicked {
+    transform: scale(1.2);
+    color: aliceblue;
+  }
