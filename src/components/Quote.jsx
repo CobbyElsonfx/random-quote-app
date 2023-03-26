@@ -87,7 +87,7 @@ function Quote() {
                 <div className="flex relative pt-6">
                 <a href="#" className="text-sm p-2  absolute bottom-0 left-2 font-medium text-indigo-500 text-right">{author} </a>
                 <div className="absolute right-6 bottom-1"> 
-                    <FontAwesomeIcon icon={faStar } className={isClicked? "clicked" : "notClicked"}  onClick={handleStarIconClick} size="lg" style={{color:"blue"}} />                       
+                    <FontAwesomeIcon icon={faStar } className={` ${isClicked? "starIcon clicked" : "starIcon"} `}    onClick={handleStarIconClick} size="lg" style={{color:"blue"}} />                       
                 </div>
 
                 </div>

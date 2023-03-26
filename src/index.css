@@ -10,6 +10,10 @@ body {
 
 
 .clicked {
-    transform: scale(1.2);
+    transform: scale(1.4);
     color: aliceblue;
+    cursor: pointer;
+  }
+.starIcon {
+    transition: all 0.3s ease;
   }
