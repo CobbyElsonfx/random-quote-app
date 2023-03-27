@@ -77,7 +77,7 @@ function Quote() {
 
     return (
         <div>
-            <div className="container mx-auto h-900  max-w-lg py-4  bg-white shadow-lg  space-y-5 rounded-lg my-20">
+            <div className="container mx-auto h-600  max-w-lg py-4  bg-white shadow-lg  space-y-5 rounded-lg my-20">
                 <div className="flex justify-center md:justify-end -mt-16">
                         <img className="w-20 h-20 object-cover rounded-full border-2 border-indigo-500" src="https://images.unsplash.com/photo-1499714608240-22fc6ad53fb2?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=334&q=80"/>
                 </div>
