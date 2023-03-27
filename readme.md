@@ -7,8 +7,7 @@ Getting Started
 
     Clone this repository to your local machine.
     Install the dependencies using npm install.
-    Start the development server using npm start.
-    Open the app in your browser at http://localhost:3000.
+    Start the development server using npm run dev
 
 ### Using the App
 
@@ -22,7 +21,8 @@ To access your saved quotes, click the "Saved Quotes" button in the navigation b
 This app was built using the following technologies:
 
     React
-    React Router
+    useEffects
+    useStates
     Tailwind CSS
 
 ### Contributing

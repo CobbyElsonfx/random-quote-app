@@ -5,10 +5,10 @@ import Sidebar from "./components/Sidebar"
 
 function App() {
   return (
-    <div className="App">
+    <React.Fragment className="App">
       <Sidebar/>
       <Quote/>
-    </div>
+    </React.Fragment>
   )
 }
 
