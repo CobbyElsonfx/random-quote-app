@@ -17,7 +17,7 @@ function Quote() {
     const [isClicked , setisClick] = useState(false)  //handles  the font awesome favorite icon
     const [fav , setFav] = useState("")
     const [currentQuoteIndex, setCurrentQuoteIndex] = useState(0); // keep track of the current quote index
-    const [quotesData , setQuotesData] = useState([])
+    const [quotesData , setQuotesData] = useState([])   // the fetch data is pushed into the quotes Data state so that it can be accesed in all functions
 
     useEffect(()=> {
      fetchQuotes() 
@@ -87,7 +87,7 @@ function Quote() {
                 <div className="flex relative pt-6">
                 <a href="#" className="text-sm p-2  absolute bottom-0 left-2 font-medium text-indigo-500 text-right">{author} </a>
                 <div className="absolute right-6 bottom-1"> 
-                    <FontAwesomeIcon icon={faStar } className={` ${isClicked? "starIcon clicked" : "starIcon"} `}    onClick={handleStarIconClick} size="lg" style={{color:"blue"}} />                       
+                    <FontAwesomeIcon icon={faStar } className={` ${isClicked? "starIcon clicked" : "starIcon"} `}    onClick={handleStarIconClick} size="lg" style={{color:"" , outline:" red"}} />                       
                 </div>
 
                 </div>
@@ -95,14 +95,14 @@ function Quote() {
                 
             </div>
 
-            <div className="  flex items-center space-x-3 justify-center bg-white py-5 w-1/3 mx-auto  rounded">
+            <div className="  flex items-center space-x-3 justify-center bg-white py-5 md:w-1/3  sm:w-1/3 mx-auto  rounded">
                 <button onClick={decrement} className='relative object-contain inline-flex text-sm sm:text-base rounded-md font-medium border-2  border-transparent transition-colors outline-transparent focus:outline-transparent text-white bg-[#4040F2] hover:bg-[#3333D1] focus:border-[#B3B3FD] focus:bg-[#4040F2] px-4 py-1 sm:py-1.5 sm:px-5'>
                     Prev.
                 </button>
                 <button onClick ={fetchQuotes}  className='relative  object-contain inline-flex text-sm sm:text-base rounded-md font-medium border-2  border-transparent transition-colors outline-transparent focus:outline-transparent text-white bg-[#4040F2] hover:bg-[#3333D1] focus:border-[#B3B3FD] focus:bg-[#4040F2] px-4 py-1 sm:py-1.5 sm:px-5'>
                     Random
                 </button>
-                <button onClick={increment}  className='relative ring-purple-500  ring-offset-4 inline-flex text-sm sm:text-base rounded-md font-medium border-2  border-transparent transition-colors outline-transparent focus:outline-transparent text-white bg-[#4040F2] hover:bg-[#3333D1] focus:border-[#B3B3FD] focus:bg-[#4040F2] px-4 py-1 sm:py-1.5 sm:px-5'>
+                <button onClick={increment}  className='relative ring-purple-500 hover:bg-tranparent ring-offset-4 inline-flex text-sm sm:text-base rounded-md font-medium border-2  border-transparent transition-colors outline-transparent focus:outline-transparent text-white bg-[#4040F2] hover:bg-[#3333D1] focus:border-[#B3B3FD] focus:bg-[#4040F2] px-4 py-1 sm:py-1.5 sm:px-5'>
                     Next
                 </button>
              </div>

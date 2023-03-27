@@ -1,12 +1,12 @@
 
 import './App.css' 
 import Quote from "./components/Quote"
-// import Sidebar from "./components/Sidebar"
+import Sidebar from "./components/Sidebar"
 
 function App() {
   return (
     <div className="App">
-      {/* <Sidebar/> */}
+      <Sidebar/>
       <Quote/>
     </div>
   )
