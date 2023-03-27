@@ -1,4 +1,4 @@
-## Random Quote App
+# Random Quote App
 
 This is a simple app built with React that allows you to add your favorite quotes and access them later. The app uses the useEffect and useState hooks to manage the state of the quotes.
 Getting Started

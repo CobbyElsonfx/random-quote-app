@@ -8,7 +8,7 @@ function Sidebar() {
                <ul class="list-reset flex  md:space-y-2 md:pt-7 flex-row md:border-1 md:border-white  md:flex-col text-center md:text-center">
                   <li class="flex-1">
                      <a href="#" class="block py-3  pl-1 align-middle text-gray-800 no-underline hover:text-pink-500  ">
-                     <i class="fas fa-link pr-0 md:pr-3"></i><span class="pb-1 md:pb-0 text-xs md:text-base text-gray-600 block md:inline-block">Home</span>
+                     <i class="fas fa-link pr-0 md:pr-3"></i><span class="pb-1 md:pb-0 text-xs md:text-base text-gray-400 hover:text:white block md:inline-block">Home</span>
                      </a>
                   </li>
                   <li className=" flex-1">

@@ -4,6 +4,7 @@ import {useState,useEffect} from 'react'
 import axios from 'axios'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faStar} from '@fortawesome/free-solid-svg-icons'
+import { FaHeart } from 'react-icons/fa';
 
 
 
@@ -18,6 +19,7 @@ function Quote() {
     const [fav , setFav] = useState("")
     const [currentQuoteIndex, setCurrentQuoteIndex] = useState(0); // keep track of the current quote index
     const [quotesData , setQuotesData] = useState([])   // the fetch data is pushed into the quotes Data state so that it can be accesed in all functions
+      const [liked, setLiked] = useState(false);
 
     useEffect(()=> {
      fetchQuotes() 
@@ -75,19 +77,23 @@ function Quote() {
 
     return (
         <div>
-            <div className="container mx-auto h-600  max-w-lg py-4  bg-white shadow-lg  space-y-5 rounded-lg my-20">
+            <div className="container mx-auto h-900  max-w-lg py-4  bg-white shadow-lg  space-y-5 rounded-lg my-20">
                 <div className="flex justify-center md:justify-end -mt-16">
                         <img className="w-20 h-20 object-cover rounded-full border-2 border-indigo-500" src="https://images.unsplash.com/photo-1499714608240-22fc6ad53fb2?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=334&q=80"/>
                 </div>
                 <div className="p-5">
                         <h2 className="text-gray-800 text-3xl font-semibold">Quotes Lab</h2>
-                        <p className="mt-2 text-gray-600">{quote}</p>
+                        <p className="mt-2 text-darkGray">{quote}</p>
                 </div>
 
                 <div className="flex relative pt-6">
                 <a href="#" className="text-sm p-2  absolute bottom-0 left-2 font-medium text-indigo-500 text-right">{author} </a>
                 <div className="absolute right-6 bottom-1"> 
-                    <FontAwesomeIcon icon={faStar } className={` ${isClicked? "starIcon clicked" : "starIcon"} `}    onClick={handleStarIconClick} size="lg" style={{color:"" , outline:" red"}} />                       
+                    <button  className={`shadow-lg rounded-full p-2 ${ liked ? 'text-red shadow-md shadow-red' : 'text-lightGray shadow-md shadow-lightGray'}`} onClick={() => setLiked(!liked)}>
+                     <FaHeart size={20} />
+                    </button>
+
+                    {/* <FontAwesomeIcon icon={faStar } className={` ${isClicked? "starIcon clicked" : "starIcon"} `}    onClick={handleStarIconClick} size="lg" style={{}} />                        */}
                 </div>
 
                 </div>
