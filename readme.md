@@ -1,6 +1,6 @@
 # Random Quote App
 
-This is a simple app built with React that allows you to add your favorite quotes and access them later. The app uses the useEffect and useState hooks to manage the state of the quotes.
+This is a simple app built with React that allows you to views over thousands of different quote and thier respective authors just on a button click . The app uses the useEffect and useState hooks to manage the state of the quotes.
 Getting Started
 
 # LINK TO PROJECT (still under construction) : https://glittery-smakager-64a3cb.netlify.app/
