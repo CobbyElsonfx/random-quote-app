@@ -17,6 +17,7 @@ To add a new quote, simply enter it in the input field at the top of the page an
 
 To remove a quote, click the "Remove" button next to the quote.
 
+* YET TO ADD FUNCTIONALITY
 To access your saved quotes, click the "Saved Quotes" button in the navigation bar. This will take you to a page that displays all of your saved quotes.
 ### Technologies Used
 
