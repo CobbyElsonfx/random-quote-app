@@ -16,7 +16,7 @@ function Quote() {
     const [quote, setQuote] = useState("")   //  the state for the quote
     const [author, setAuthor]  = useState("")
     const [isClicked , setIsClick] = useState(false)  //handles  the font awesome favorite icon
-    const [liked, setLiked] = useState("");
+    const [liked, setLiked] = useState(false);
     const [fav , setFav] = useState("")
     const [currentQuoteIndex, setCurrentQuoteIndex] = useState(0); // keep track of the current quote index
     const [quotesData , setQuotesData] = useState([])   // the fetch data is pushed into the quotes Data state so that it can be accesed in all functions
@@ -35,6 +35,7 @@ function Quote() {
        axios.get(url).then((res)=>{
         const likedPropertyData =  res.data.map(quotesObj => ({...quotesObj, liked:false , ID: IdGenerator()}))
         setQuotesData(likedPropertyData)
+        
         console.log(quotesData)
        }).catch((err)=> {
         console.log(err)
@@ -92,6 +93,8 @@ function Quote() {
         // updated the isClicked to true
 
         setIsClick(true)
+        setLiked(!liked)
+
         
     }
 
@@ -110,7 +113,7 @@ function Quote() {
                 <div className="flex relative pt-6">
                 <a href="#" className="text-sm p-2  absolute bottom-0 left-2 font-medium text-indigo-500 text-right">{author} </a>
                 <div className="absolute right-6 bottom-1"> 
-                    <button  className={`shadow-lg rounded-full p-2 ${quote.liked || isClicked? ' text-red shadow-md shadow-red' : 'text-lightGray shadow-md shadow-lightGray'}`}  onClick={() => handleLike(quotesData)}>
+                    <button  className={`shadow-lg rounded-full p-2 ${isClicked? ' text-red shadow-md shadow-red' : 'text-lightGray shadow-md shadow-lightGray'}`}  onClick={() => handleLike(quotesData)}>
                      <FaHeart size={20} />
                     </button>
 

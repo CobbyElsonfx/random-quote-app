@@ -22,10 +22,12 @@ To access your saved quotes, click the "Saved Quotes" button in the navigation b
 
 This app was built using the following technologies:
 
-    React
-    useEffects
-    useStates
+    React.
+        useEffects
+        useStates
+        ErrorBooundry
     Tailwind CSS
+    
 
 ### Contributing
 
