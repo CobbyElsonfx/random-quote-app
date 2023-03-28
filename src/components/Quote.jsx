@@ -15,34 +15,46 @@ function Quote() {
 
     const [quote, setQuote] = useState("")   //  the state for the quote
     const [author, setAuthor]  = useState("")
-    const [isClicked , setisClick] = useState(false)  //handles  the font awesome favorite icon
+    const [isClicked , setIsClick] = useState(false)  //handles  the font awesome favorite icon
+    const [liked, setLiked] = useState("");
     const [fav , setFav] = useState("")
     const [currentQuoteIndex, setCurrentQuoteIndex] = useState(0); // keep track of the current quote index
     const [quotesData , setQuotesData] = useState([])   // the fetch data is pushed into the quotes Data state so that it can be accesed in all functions
-      const [liked, setLiked] = useState(false);
 
     useEffect(()=> {
      fetchQuotes() 
     }, [])
 
+    let idCounter = 0;
+    const IdGenerator = ()=>{
+        return idCounter++;
+    }
+
 
     const fetchQuotes = ()=>{
        axios.get(url).then((res)=>{
-        setQuotesData(res.data)
-        var min = 1
-        const currentQuotes = (Math.floor(Math.random() * (quotesData.length - min + 1)) + min) //generate a random number which can be used as an index to access the quotes from the array of objects
-        const quoteOfDay = quotesData[currentQuotes].quoteText
-        const authorOfQuote = quotesData[currentQuotes].quoteAuthor
-        setQuote(quoteOfDay) 
-        setAuthor(authorOfQuote)
+        const likedPropertyData =  res.data.map(quotesObj => ({...quotesObj, liked:false , ID: IdGenerator()}))
+        setQuotesData(likedPropertyData)
+        console.log(quotesData)
        }).catch((err)=> {
         console.log(err)
        })
     }
 
+    const randomQuotes = ()=>{
+        let min = 1
+        let newIndex = (Math.floor(Math.random() * (quotesData.length - min + 1)) + min) //generate a random number which can be used as an index to access the quotes from the array of objects
+        const quoteOfDay = quotesData[newIndex].quoteText
+        const authorOfQuote = quotesData[newIndex].quoteAuthor
+        const quoteLike = quotesData[newIndex].liked
+        setQuote(quoteOfDay) 
+        setAuthor(authorOfQuote)
+        setCurrentQuoteIndex(newIndex)
+    }
+
     const increment = () =>{
         let newIndex = currentQuoteIndex + 1;
-        if (newIndex >= quotesData.length) {
+        if (newIndex > quotesData.length) {
             newIndex = 0;
         }
         const quoteOfDay = quotesData[newIndex].quoteText;
@@ -54,7 +66,7 @@ function Quote() {
 
     const decrement = () =>{
         let newIndex = currentQuoteIndex  - 1;
-        if (newIndex < 0) {
+        if (newIndex <=  0) {
             newIndex = 0;
         }
         const quoteOfDay = quotesData[newIndex].quoteText;
@@ -64,14 +76,23 @@ function Quote() {
         setCurrentQuoteIndex(newIndex); // update the current quote index
     }
 
+    //a function that takes ihe quotes object and  sets the liked property to true , it also updates the 
+    // q
+    const handleLike = (dataOfQuotes)=>{
+        console.log("from the handlike" )
+        const updatedQuotes = dataOfQuotes.map((q) =>{
+            if (q.ID === dataOfQuotes[currentQuoteIndex].ID){
+                console.log(q.quoteText,)
+                return {...q, liked:true}
+            }
+            return  q
+        })
 
-    const handleStarIconClick = ()=>{
-        setisClick(true)
-        setTimeout(() => {
-            setisClick(false)
-            
-        }, 400);
+        setQuotesData(updatedQuotes)
+        // updated the isClicked to true
 
+        setIsClick(true)
+        
     }
 
 
@@ -89,11 +110,11 @@ function Quote() {
                 <div className="flex relative pt-6">
                 <a href="#" className="text-sm p-2  absolute bottom-0 left-2 font-medium text-indigo-500 text-right">{author} </a>
                 <div className="absolute right-6 bottom-1"> 
-                    <button  className={`shadow-lg rounded-full p-2 ${ liked ? 'text-red shadow-md shadow-red' : 'text-lightGray shadow-md shadow-lightGray'}`} onClick={() => setLiked(!liked)}>
+                    <button  className={`shadow-lg rounded-full p-2 ${quote.liked || isClicked? ' text-red shadow-md shadow-red' : 'text-lightGray shadow-md shadow-lightGray'}`}  onClick={() => handleLike(quotesData)}>
                      <FaHeart size={20} />
                     </button>
 
-                    {/* <FontAwesomeIcon icon={faStar } className={` ${isClicked? "starIcon clicked" : "starIcon"} `}    onClick={handleStarIconClick} size="lg" style={{}} />                        */}
+                    {/* <FontAwesomeIcon icon={faStar } className={` ${isClicked? "starIcon clicked" : "starIcon"} `}    onClick={handleStarIconClick} size="lg" style={{}} />  */}
                 </div>
 
                 </div>
@@ -102,13 +123,13 @@ function Quote() {
             </div>
 
             <div className="  flex items-center space-x-3 justify-center bg-white py-5 md:w-1/3  sm:w-1/3 mx-auto  rounded">
-                <button onClick={decrement} className='relative object-contain inline-flex text-sm sm:text-base rounded-md font-medium border-2  border-transparent transition-colors outline-transparent focus:outline-transparent text-white bg-[#4040F2] hover:bg-[#3333D1] focus:border-[#B3B3FD] focus:bg-[#4040F2] px-4 py-1 sm:py-1.5 sm:px-5'>
+                <button onClick={decrement} className='relative object-contain inline-flex text-sm sm:text-base rounded-md font-medium border-2  border-transparent transition-colors  text-white bg-[#4040F2] hover:bg-[#3333D1] focus:border-[#B3B3FD] focus:bg-[#4040F2] px-4 py-1 sm:py-1.5 sm:px-5'>
                     Prev.
                 </button>
-                <button onClick ={fetchQuotes}  className='relative  object-contain inline-flex text-sm sm:text-base rounded-md font-medium border-2  border-transparent transition-colors outline-transparent focus:outline-transparent text-white bg-[#4040F2] hover:bg-[#3333D1] focus:border-[#B3B3FD] focus:bg-[#4040F2] px-4 py-1 sm:py-1.5 sm:px-5'>
+                <button onClick ={randomQuotes}  className='relative  object-contain inline-flex text-sm sm:text-base rounded-md font-medium border-2  border-transparent transition-colors  text-white bg-[#4040F2] hover:bg-[#3333D1] focus:border-[#B3B3FD] focus:bg-[#4040F2] px-4 py-1 sm:py-1.5 sm:px-5'>
                     Random
                 </button>
-                <button onClick={increment}  className='relative ring-purple-500 hover:bg-tranparent ring-offset-4 inline-flex text-sm sm:text-base rounded-md font-medium border-2  border-transparent transition-colors outline-transparent focus:outline-transparent text-white bg-[#4040F2] hover:bg-[#3333D1] focus:border-[#B3B3FD] focus:bg-[#4040F2] px-4 py-1 sm:py-1.5 sm:px-5'>
+                <button onClick={increment}  className='relative ring-purple-500 hover:bg-tranparent ring-offset-4 inline-flex text-sm sm:text-base rounded-md font-medium border-2  border-transparent transition-colors   text-white bg-[#4040F2] hover:bg-[#3333D1] focus:border-[#B3B3FD] focus:bg-[#4040F2] px-4 py-1 sm:py-1.5 sm:px-5'>
                     Next
                 </button>
              </div>
