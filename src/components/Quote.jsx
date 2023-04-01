@@ -3,9 +3,15 @@ import React from 'react'
 import {useState,useEffect} from 'react'
 import axios from 'axios'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faStar} from '@fortawesome/free-solid-svg-icons'
 import { FaHeart } from 'react-icons/fa';
-
+import forward from "../assets/forword.svg"
+import backward from "../assets/backward.svg"
+import random  from "../assets/random.svg"
+import favcon from "../assets/favorite.svg"
+import mobileDivider from "../assets/divider.svg"
+import desktopDivider from "../assets/desktopDivider.svg"
+import openQuote from "../assets/closingQuote.svg"
+import closeQuote from "../assets/openingQuote.svg"
 
 
 
@@ -15,9 +21,9 @@ function Quote() {
 
     const [quote, setQuote] = useState("")   //  the state for the quote
     const [author, setAuthor]  = useState("")
-    const [isClicked , setIsClick] = useState(false)  //handles  the font awesome favorite icon
+    const [isClicked , setIsClick] = useState(false)  //handles  the font awesome favoriteorite icon
     const [liked, setLiked] = useState(false);
-    const [fav , setFav] = useState("")
+    const [favorite , setfavorite] = useState([])
     const [currentQuoteIndex, setCurrentQuoteIndex] = useState(0); // keep track of the current quote index
     const [quotesData , setQuotesData] = useState([])   // the fetch data is pushed into the quotes Data state so that it can be accesed in all functions
 
@@ -79,61 +85,91 @@ function Quote() {
 
     //a function that takes ihe quotes object and  sets the liked property to true , it also updates the 
     // q
-    const handleLike = (dataOfQuotes)=>{
-        console.log("from the handlike" )
-        const updatedQuotes = dataOfQuotes.map((q) =>{
-            if (q.ID === dataOfQuotes[currentQuoteIndex].ID){
-                console.log(q.quoteText,)
-                return {...q, liked:true}
-            }
-            return  q
-        })
+    // const handleLike = (dataOfQuotes)=>{
+    //     console.log("from the handlike" )
+    //     const updatedQuotes = dataOfQuotes.map((q) =>{
+    //         if (q.ID === dataOfQuotes[currentQuoteIndex].ID){
+    //             console.log(q.quoteText,)
+    //             return {...q, liked:true}
+    //         }
+    //         return  q
+    //     })
 
-        setQuotesData(updatedQuotes)
-        // updated the isClicked to true
+    //     setQuotesData(updatedQuotes)
+    //     // updated the isClicked to true
 
-        setIsClick(true)
-        setLiked(!liked)
+    //     setIsClick(true)
+    //     setLiked(!liked)
 
         
+    // }
+
+  // for code resusability 
+    const addFavoriteQuotes =(quote)=>{
+        setfavorite([...favorite, quote])
     }
+
+    const  handlefavoriteQuotes = ()=>{
+        addFavoriteQuotes(quote)
+        console.log(favorite)
+    }
+
 
 
     return (
         <div>
-            <div className="container mx-auto h-600  max-w-lg py-4  bg-white shadow-lg  space-y-5 rounded-lg my-20">
+            <div className="container mx-auto  max-h-[30rem] md:min-h-[30rem]  max-w-lg py-3  bg-white shadow-lg relative  space-y-2 relative rounded-lg my-10">
                 <div className="flex justify-center md:justify-end -mt-16">
                         <img className="w-20 h-20 object-cover rounded-full border-2 border-indigo-500" src="./cobbyelsonfx-high-resolution-color-logo.png"/>
                 </div>
-                <div className="p-5">
-                        <h2 className="text-gray-800 text-3xl font-semibold">Quotes Lab</h2>
-                        <p className="mt-2 text-darkGray">{quote}</p>
+                <div className="p-3">
+                        <h2 className="text-primary text-3xl font-semibold drop-shadow-2xl">Quotes Lab</h2>
+                        <small><span>Author: {author} ~~ Quotes Number:</span>{currentQuoteIndex}</small>
+                        <div className="y" >
+                        <img src={mobileDivider} className=" md:hidden mx-auto"  alt="" />
+                        <img src={desktopDivider} className="hidden mx-auto sm:block" alt="" />
+                        </div>
+
+                        
+                        <div className="mt-2 text-primary  text-left text-2xl pb-4 indent-4  border-1 border-left border-right font-bold  relative"><img className="w-8 " src={openQuote} alt="" /><p className="">{quote} </p><img className="w-8 ml-[90%] " src={closeQuote} alt="" /> </div>
                 </div>
 
-                <div className="flex relative pt-6">
-                <a href="#" className="text-sm p-2  absolute bottom-0 left-2 font-medium text-indigo-500 text-right"><span>Author:</span> {author} </a>
-                <div className="absolute right-6 bottom-1"> 
-                    <button  className={`shadow-lg rounded-full p-2 ${isClicked? ' text-red shadow-md shadow-red' : 'text-lightGray shadow-md shadow-lightGray'}`}  onClick={() => handleLike(quotesData)}>
-                     <FaHeart size={20} />
-                    </button>
+                <div className="flex ">
+                    <div className="absolute right-6 bottom-1"> 
+                        {/* <button  className={`shadow-lg rounded-full p-2 ${isClicked? ' text-red shadow-md shadow-red' : 'text-lightGray shadow-md shadow-lightGray'}`}  onClick={() => handleLike(quotesData)}>
+                        <FaHeart size={20} />¯
+                        </button> */}
+                        <button  className= "shadow-lg rounded-full p-2 "  onClick={handlefavoriteQuotes}>
+                        <FaHeart size={20} />
+                        </button>
 
-                    {/* <FontAwesomeIcon icon={faStar } className={` ${isClicked? "starIcon clicked" : "starIcon"} `}    onClick={handleStarIconClick} size="lg" style={{}} />  */}
-                </div>
-
+                        {/* <FontAwesomeIcon icon={faStar } className={` ${isClicked? "starIcon clicked" : "starIcon"} `}    onClick={handleStarIconClick} size="lg" style={{}} />  */}
+                    </div>
                 </div>
                 
                 
             </div>
 
-            <div className="  flex items-center space-x-3 justify-center bg-white py-5 md:w-1/3  sm:w-1/3 mx-auto  rounded">
-                <button onClick={decrement} className='relative object-contain inline-flex text-sm sm:text-base rounded-md font-medium border-2  border-transparent transition-colors  text-white bg-[#4040F2] hover:bg-[#3333D1] focus:border-[#B3B3FD] focus:bg-[#4040F2] px-4 py-1 sm:py-1.5 sm:px-5'>
-                    Prev.
+            <div className="flex items-center space-x-2 w-full  justify-center bg-white py-5 md:w-1/3  fixed  bottom-0 left-0 h-[4rem] absolute  md:absolute md:bottom-10 md:left-[33%] md:rounded-md">
+            
+                 <button className="justify-center" onClick={handlefavoriteQuotes}>
+                    <img src={favcon} className="w-6 h-6 text-center "  alt=""  />
+                    <span className="text-center font-semibold text-sm">Favorites</span>
                 </button>
-                <button onClick ={randomQuotes}  className='relative  object-contain inline-flex text-sm sm:text-base rounded-md font-medium border-2  border-transparent transition-colors  text-white bg-[#4040F2] hover:bg-[#3333D1] focus:border-[#B3B3FD] focus:bg-[#4040F2] px-4 py-1 sm:py-1.5 sm:px-5'>
-                    Random
+                <button onClick={decrement}>
+                    <img src={backward}    className="w-6 "  alt="" />
+                    <span className="text-center font-semibold text-sm">Backward</span>
+
                 </button>
-                <button onClick={increment}  className='relative ring-purple-500 hover:bg-tranparent ring-offset-4 inline-flex text-sm sm:text-base rounded-md font-medium border-2  border-transparent transition-colors   text-white bg-[#4040F2] hover:bg-[#3333D1] focus:border-[#B3B3FD] focus:bg-[#4040F2] px-4 py-1 sm:py-1.5 sm:px-5'>
-                    Next
+                <button onClick ={randomQuotes}>
+                    <img src={random} className="w-12 h-6" alt="" />
+                    <span className="text-center  font-semibold text-sm">Random</span>
+
+                </button>
+                <button onClick={increment}>
+                    <img src={forward} className="w-6" alt="" />
+                    <span className="text-center font-semibold text-sm">Forward</span>
+
                 </button>
              </div>
             
