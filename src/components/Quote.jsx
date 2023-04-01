@@ -16,6 +16,7 @@ import closeQuote from "../assets/openingQuote.svg"
 
 
 
+
 function Quote() {
     const url = "https://raw.githubusercontent.com/JamesFT/Database-Quotes-JSON/master/quotes.json"
 
@@ -124,14 +125,14 @@ function Quote() {
                 </div>
                 <div className="p-3">
                         <h2 className="text-primary text-3xl font-semibold drop-shadow-2xl">Quotes Lab</h2>
-                        <small><span>Author: {author} ~~ Quotes Number:</span>{currentQuoteIndex}</small>
+                        <p><span>Author: {author} ~~ Quotes Number:</span>{currentQuoteIndex}</p>
                         <div className="y" >
                         <img src={mobileDivider} className=" md:hidden mx-auto"  alt="" />
                         <img src={desktopDivider} className="hidden mx-auto sm:block" alt="" />
                         </div>
 
                         
-                        <div className="mt-2 text-primary  text-left text-2xl pb-4 indent-4  border-1 border-left border-right font-bold  relative"><img className="w-8 " src={openQuote} alt="" /><p className="">{quote} </p><img className="w-8 ml-[90%] " src={closeQuote} alt="" /> </div>
+                        <div className="mt-2 text-primary  text-left text-2xl pb-4 indent-4  border-1 border-left border-right font-bold md:p-4  relative"><img className="w-8 " src={openQuote} alt="" /><p className="">{quote} </p><img className="w-8 ml-[90%] " src={closeQuote} alt="" /> </div>
                 </div>
 
                 <div className="flex ">
@@ -150,25 +151,25 @@ function Quote() {
                 
             </div>
 
-            <div className="flex items-center space-x-2 w-full  justify-center bg-white py-5 md:w-1/3  fixed  bottom-0 left-0 h-[4rem] absolute  md:absolute md:bottom-10 md:left-[33%] md:rounded-md">
+            <div className="flex items-center space-x-2 md:space-x-8 w-full  justify-center bg-white py-5 md:w-[60%]  fixed   bottom-0 left-0 h-[4rem] md:h-[6rem] absolute  md:absolute md:bottom-10 md:left-[19%] md:rounded-md">
             
-                 <button className="justify-center" onClick={handlefavoriteQuotes}>
-                    <img src={favcon} className="w-6 h-6 text-center "  alt=""  />
-                    <span className="text-center font-semibold text-sm">Favorites</span>
+                 <button className="justify-center"  >
+                    <img src={favcon} className="w-6 h-6  md:w-12 md:h-12 text-center "  alt=""  />
+                    <span className="md:hover:text-primary md:hover:text-gray-400 text-center font-semibold text-sm md:text-xl ">Favorites</span>
                 </button>
                 <button onClick={decrement}>
-                    <img src={backward}    className="w-6 "  alt="" />
-                    <span className="text-center font-semibold text-sm">Backward</span>
+                    <img src={backward}    className="w-6 md:w-12 md:h-12 "  alt="" />
+                    <span className="text-center font-semibold text-sm md:text-xl">Backward</span>
 
                 </button>
                 <button onClick ={randomQuotes}>
-                    <img src={random} className="w-12 h-6" alt="" />
-                    <span className="text-center  font-semibold text-sm">Random</span>
+                    <img src={random} className="w-12 h-6 md:w-12 md:h-12" alt="" />
+                    <span className="text-center  font-semibold text-sm md:text-xl">Random</span>
 
                 </button>
                 <button onClick={increment}>
-                    <img src={forward} className="w-6" alt="" />
-                    <span className="text-center font-semibold text-sm">Forward</span>
+                    <img src={forward} className="w-6 md:w-12 md:h-12" alt="" />
+                    <span className="text-center font-semibold text-sm md:text-xl">Forward</span>
 
                 </button>
              </div>
