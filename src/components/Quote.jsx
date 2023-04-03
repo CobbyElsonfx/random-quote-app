@@ -1,7 +1,10 @@
 
-import React from 'react'
-import {useState,useEffect} from 'react'
+import React ,{useState,useEffect} from 'react'
 import axios from 'axios'
+import Favorites from "./Favorites"
+
+
+//Icons
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { FaHeart } from 'react-icons/fa';
 import forward from "../assets/forword.svg"
@@ -108,13 +111,19 @@ function Quote() {
   // for code resusability 
     const addFavoriteQuotes =(quote)=>{
         setfavorite([...favorite, quote])
+
+
     }
 
     const  handlefavoriteQuotes = ()=>{
         addFavoriteQuotes(quote)
         console.log(favorite)
     }
-
+    
+    //passin the state of the favorite as a prop
+    const = favorite.
+    .map((favQuotes) =>  <Favorites favQuotes = {favQuotes} /> );
+    
 
 
     return (
@@ -137,14 +146,9 @@ function Quote() {
 
                 <div className="flex ">
                     <div className="absolute right-6 bottom-1"> 
-                        {/* <button  className={`shadow-lg rounded-full p-2 ${isClicked? ' text-red shadow-md shadow-red' : 'text-lightGray shadow-md shadow-lightGray'}`}  onClick={() => handleLike(quotesData)}>
-                        <FaHeart size={20} />¯
-                        </button> */}
                         <button  className= "shadow-lg rounded-full p-2 "  onClick={handlefavoriteQuotes}>
                         <FaHeart size={20} />
                         </button>
-
-                        {/* <FontAwesomeIcon icon={faStar } className={` ${isClicked? "starIcon clicked" : "starIcon"} `}    onClick={handleStarIconClick} size="lg" style={{}} />  */}
                     </div>
                 </div>
                 

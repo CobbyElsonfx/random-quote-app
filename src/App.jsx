@@ -11,11 +11,12 @@ function App() {
   
   return (
     <>
-    <ErrorBoundary fallback={<div>Something went wrong</div>}>    
       <div className="App ">
-        <Quote/>
+         <ErrorBoundary fallback={<div>Something went wrong</div>}>    
+          <Quote/>
+        </ErrorBoundary>
+
       </div>
-    </ErrorBoundary>
     </>
     
   )
